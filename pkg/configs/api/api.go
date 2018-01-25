@@ -229,6 +229,11 @@ func (a *API) deactivateConfig(w http.ResponseWriter, r *http.Request) {
 	logger := util.WithContext(r.Context(), util.Logger)
 
 	if err := a.db.DeactivateConfig(userID); err != nil {
+		if err == sql.ErrNoRows {
+			level.Info(logger).Log("msg", "config deactivated, no configuration", "userID", userID)
+			http.Error(w, "No configuration", http.StatusNotFound)
+			return
+		}
 		level.Error(logger).Log("msg", "error deactivating config", "err", err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -246,10 +251,15 @@ func (a *API) restoreConfig(w http.ResponseWriter, r *http.Request) {
 	logger := util.WithContext(r.Context(), util.Logger)
 
 	if err := a.db.RestoreConfig(userID); err != nil {
+		if err == sql.ErrNoRows {
+			level.Info(logger).Log("msg", "restore config - no configuration", "userID", userID)
+			http.Error(w, "No configuration", http.StatusNotFound)
+			return
+		}
 		level.Error(logger).Log("msg", "error restoring config", "err", err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 	level.Info(logger).Log("msg", "config restored", "userID", userID)
-	w.WriteHeader(http.StatusCreated)
+	w.WriteHeader(http.StatusOK)
 }

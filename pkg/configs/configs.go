@@ -38,8 +38,9 @@ func (v View) GetVersionedRulesConfig() *VersionedRulesConfig {
 		return nil
 	}
 	return &VersionedRulesConfig{
-		ID:     v.ID,
-		Config: v.Config.RulesFiles,
+		ID:        v.ID,
+		Config:    v.Config.RulesFiles,
+		DeletedAt: v.DeletedAt,
 	}
 }
 
@@ -95,6 +96,7 @@ func (c RulesConfig) Parse() ([]rules.Rule, error) {
 // VersionedRulesConfig is a RulesConfig together with a version.
 // `data Versioned a = Versioned { id :: ID , config :: a }`
 type VersionedRulesConfig struct {
-	ID     ID          `json:"id"`
-	Config RulesConfig `json:"config"`
+	ID        ID          `json:"id"`
+	Config    RulesConfig `json:"config"`
+	DeletedAt time.Time   `json:"deleted_at"`
 }
