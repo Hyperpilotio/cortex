@@ -1,5 +1,21 @@
 <p align="center"><img src="imgs/logo.png" alt="Weave Cortex Logo"></p>
 
+# Running cortex on GCP
+
+## Prerequisite
+
+* Enable Bigtable's API on GCP pannel. (Cloud Bigtable API, Cloud Bigtable Admin API, and Google Cloud Bigtable Admin API)
+* Create Bigtable instances on GCP.
+* Create service account on GCP taht has permission to access Bigtable.
+* Modify files (`ingester-dep.yaml`, `querier-dep.yaml`, `ruler-dep.yaml`, and `table-manager-dep.yaml`) in k8s directory to use proper parameters according to the info of existing bigtable instance.
+        Specifying proper values for flags `-bigtable.project=` and `-bigtable.instance=`
+
+## Steps
+
+* Use gcloud command to create GKE instances with a service account created in previous steps.
+    ex: `gcloud container clusters create CLUSTER_NAME --num-nodes 4 --service-account SERVICE_ACCOUNT`
+* kubectl create -f k8s/
+
 # Open source, horizontally scalable Prometheus as a service
 
 [![Circle CI](https://circleci.com/gh/weaveworks/cortex/tree/master.svg?style=shield)](https://circleci.com/gh/weaveworks/cortex/tree/master)

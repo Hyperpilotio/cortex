@@ -16,6 +16,9 @@ spec:
         imagePullPolicy: IfNotPresent
         args:
         - -server.http-listen-port=80
+        - -chunk.storage-client=gcp
+        - -bigtable.project=
+        - -bigtable.instance=
         - -dynamodb.original-table-name=cortex
         - -dynamodb.url=dynamodb://user:pass@dynamodb.default.svc.cluster.local:8000
         - -dynamodb.periodic-table.prefix=cortex_weekly_
