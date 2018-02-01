@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
       - name: ruler
-        image: quay.io/weaveworks/cortex-ruler
+        image: hyperpilot/cortex-ruler
         imagePullPolicy: IfNotPresent
         args:
         - -log.level=debug

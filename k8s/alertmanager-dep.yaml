@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
       - name: alertmanager
-        image: quay.io/weaveworks/cortex-alertmanager
+        image: hyperpilot/cortex-alertmanager
         imagePullPolicy: IfNotPresent
         args:
         - -log.level=debug
