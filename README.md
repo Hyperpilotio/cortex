@@ -1,5 +1,9 @@
 <p align="center"><img src="imgs/logo.png" alt="Weave Cortex Logo"></p>
 
+# NOTE
+
+To deploy this project on GCP, please check `gcp` branch for more information.
+
 # Open source, horizontally scalable Prometheus as a service
 
 [![Circle CI](https://circleci.com/gh/weaveworks/cortex/tree/master.svg?style=shield)](https://circleci.com/gh/weaveworks/cortex/tree/master)
